@@ -1,0 +1,29 @@
+class Api::V1::UsersController < ApplicationController
+  skip_before_action :authenticate!, only: [ :create, :sign_in ]
+
+  def create
+    @user = User.new(email: params[:email], password: params[:password], password_confirmation: params[:password_confirmation])
+
+    if @user.save
+      render json: @user
+    else
+      render json: { errors: @user.errors.full_messages }, status: 400
+    end
+  end
+
+  def sign_in
+    @user = User.find_by(email: params[:email])
+
+    byebug
+
+    if @user && @user.authenticate(params[:password])
+      render json: @user
+    else
+      render json: { errors: ['ログインに失敗しました'] }, status: 401
+    end
+  end
+
+  def me
+    render json: current_user
+  end
+end
