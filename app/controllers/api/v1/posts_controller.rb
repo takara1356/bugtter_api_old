@@ -1,4 +1,5 @@
 class Api::V1::PostsController < ApplicationController
+  skip_before_action :authenticate!
 
   def index
     posts = Post.all
@@ -30,6 +31,7 @@ class Api::V1::PostsController < ApplicationController
       raw_params = {
         error_message: params[:error_message],
         description: params[:description],
+        language: params[:language],
         user_id: params[:user_id]
       }
       params = ActionController::Parameters.new(raw_params)
