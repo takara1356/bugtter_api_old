@@ -20,6 +20,15 @@ class Api::V1::PostsController < ApplicationController
     end
   end
 
+  def update
+    post = Post.find(params[:id])
+    if post.update_attributes(post_params)
+      render json: {status: 200, message: "編集完了"}
+    else
+      render json: {status: 400, message: post.errors.full_messages}
+    end
+  end
+
   def destroy
     Post.find(params[:id]).destroy
     render json: {status: 200, message: "投稿を削除しました"}
