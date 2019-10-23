@@ -14,7 +14,7 @@ class Api::V1::PostsController < ApplicationController
   def create
     post = Post.new(post_params)
     if post.save
-      render json: {status: 200, message: "投稿完了"}
+      render json: {status: 200, message: "投稿完了", post: post}
     else
       render json: {status: 400, message: post.errors.full_messages}
     end
@@ -31,7 +31,7 @@ class Api::V1::PostsController < ApplicationController
 
   def destroy
     Post.find(params[:id]).destroy
-    render json: {status: 200, message: "投稿を削除しました"}
+    render json: {status: 200, message: "投稿を削除"}
   end
 
   private 
