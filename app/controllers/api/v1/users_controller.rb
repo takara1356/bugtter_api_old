@@ -13,7 +13,6 @@ class Api::V1::UsersController < ApplicationController
 
   def sign_in
     user = User.find_by(email: params[:email])
-
     if user && user.authenticate(params[:password])
       render json: user
     else
