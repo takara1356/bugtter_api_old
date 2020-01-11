@@ -82,5 +82,5 @@ production:
   <<: *default
   database: bugtter_api_production
   username: <%= ENV['DATABASE_USER_NAME_PRODUCTION'] %>
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: 
   host: <%= ENV['DATABASE_HOST_PRODUCTION'] %>
